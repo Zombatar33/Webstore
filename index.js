@@ -57,6 +57,7 @@ app.post("/", (req, res) => {
 
         username = username.trim();
         email = email.trim();
+        
         _id = username;
 
         var obj = { _id, username, email, password };
@@ -67,9 +68,9 @@ app.post("/", (req, res) => {
                 if (docs != null) {
                     res.redirect('/?form=register&status=error&msg=Username already in use');
                 }else {
-                    userDatabase.findOne({email: obj.email}, function(err, docs) 
+                    userDatabase.findOne({email: obj.email}, function(err, docs2) 
                     {
-                        if (!docs != null) {
+                        if (docs2 != null) {
                             res.redirect('/?form=register&status=error&msg=E-Mail already in use');
                         }else {
                             userDatabase.insert(obj);
