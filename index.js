@@ -34,8 +34,21 @@ app.post("/", (req, res) => {
     if (type === "login") {
         var email = req.body.email;
         var password = req.body.password;
-        
-        res.redirect('/?form=login&status=error&msg=Invalid username or password');
+
+        if (validateEmail(email) && validatePassword(password)) {
+            userDatabase.findOne({email: email}, function (err, docs) 
+            { 
+                if (docs == null) {
+                    res.redirect('/?form=login&status=error&msg=Invalid credentials');
+                }else {
+                    res.send(`Hello, ${docs.username}!`);
+                }
+            });
+        }else {
+            res.redirect('/?form=login&status=error&msg=Invalid credentials');
+        }
+
+        return;
     } else if (type === "register") {
         var username = req.body.username;
         var email = req.body.email;
@@ -48,17 +61,26 @@ app.post("/", (req, res) => {
 
         var obj = { _id, username, email, password };
 
-
-
-        userDatabase.findOne({_id: obj.username}, function (err, docs) 
-        { 
-            if (docs != null) {
-                res.redirect('/?form=register&status=error&msg=Username already exists');
-            }else {
-                userDatabase.insert(obj);
-                res.redirect('/?form=register&status=success&msg=Registered successfully');
-            }
-        });
+        if (validateEmail(email) && validateUsername(username) && validatePassword(password) && validateMatchingPassword(password, confirmPassword)) {
+            userDatabase.findOne({_id: obj.username}, function (err, docs) 
+            { 
+                if (docs != null) {
+                    res.redirect('/?form=register&status=error&msg=Username already in use');
+                }else {
+                    userDatabase.findOne({email: obj.email}, function(err, docs) 
+                    {
+                        if (!docs != null) {
+                            res.redirect('/?form=register&status=error&msg=E-Mail already in use');
+                        }else {
+                            userDatabase.insert(obj);
+                            res.redirect('/?form=login&status=success&msg=Registered successfully');
+                        }
+                    })
+                }
+            });
+        }else {
+            res.redirect('/?form=register&status=error&msg=Invalid Credentials');
+        }
 
         return;
     } else {
@@ -66,3 +88,20 @@ app.post("/", (req, res) => {
     }
 });
 
+function validateEmail(email) {
+    return email.length > 0 && String(email)
+      .toLowerCase()
+      .match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+};
+
+function validateUsername(username) {
+    return username.length > 2;
+}
+
+function validatePassword(password) {
+    return password.length > 7;
+}
+
+function validateMatchingPassword(password1, password2) {
+    return password1.length > 0 && password2.length > 0 && password1 === password2;
+}
