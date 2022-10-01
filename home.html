@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <title>Document</title>
+</head>
+<body>
+    <script src="login_signup.js"></script>
+
+    <div class="container">
+        <form method="POST" class="form" id="login">
+            <h1 class="form__title">Login</h1>
+            <div class="form__message form__message--error"></div>
+            <input name="type" class="form--hidden" value="login">
+            <div class="form__input-group">
+                <input name="email" type="text" class="form__input" autofocus placeholder="E-Mail">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input name="password" type="password" class="form__input" placeholder="Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" type="submit">Login</button>
+            <p class="form__text">
+                <a href="./" id="linkCreateAccount" class="form__link">Create new account</a>
+            </p>
+        </form>
+
+        <form method="POST" class="form form--hidden" id="createAccount">
+            <h1 class="form__title">Create Account</h1>
+            <div class="form__message form__message--error"></div>
+            <input name="type" class="form--hidden" value="register">
+            <div class="form__input-group">
+                <input name="username" type="text" id="signupUsername" class="form__input" autofocus placeholder="Username">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input name="email" type="text" id="signupEmail" class="form__input" autofocus placeholder="E-Mail Address">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input name="password" type="password" class="form__input" placeholder="Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <div class="form__input-group">
+                <input name="confirmPassword" type="password" class="form__input" placeholder="Confirm Password">
+                <div class="form__input-error-message"></div>
+            </div>
+            <button class="form__button" type="submit">Login</button>
+            <p class="form__text">
+                <a href="./" id="linkLogin" class="form__link">Login with existing account</a>
+            </p>
+        </form>
+    </div>
+</body>
+</html>
