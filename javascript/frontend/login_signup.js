@@ -48,11 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    /*
+
     loginForm.addEventListener("submit", e => {
         
     });
-    */
 
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
