@@ -9,7 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="login_signup.js"></script>
+    <script src="javascript/frontend/validation.js"></script>
+    <script src="javascript/frontend/login_signup.js"></script>
 
     <div class="container">
         <form method="POST" class="form" id="login">
@@ -17,11 +18,11 @@
             <div class="form__message form__message--error"></div>
             <input name="type" class="form--hidden" value="login">
             <div class="form__input-group">
-                <input name="email" type="text" class="form__input" autofocus placeholder="E-Mail">
+                <input name="email" type="text" id="loginEmail" class="form__input" autofocus placeholder="E-Mail">
                 <div class="form__input-error-message"></div>
             </div>
             <div class="form__input-group">
-                <input name="password" type="password" class="form__input" placeholder="Password">
+                <input name="password" type="password" id="loginPassword" class="form__input" placeholder="Password">
                 <div class="form__input-error-message"></div>
             </div>
             <button class="form__button" type="submit">Login</button>
@@ -43,14 +44,14 @@
                 <div class="form__input-error-message"></div>
             </div>
             <div class="form__input-group">
-                <input name="password" type="password" class="form__input" placeholder="Password">
+                <input name="password" type="password" id="signupPassword" class="form__input" placeholder="Password">
                 <div class="form__input-error-message"></div>
             </div>
             <div class="form__input-group">
-                <input name="confirmPassword" type="password" class="form__input" placeholder="Confirm Password">
+                <input name="confirmPassword" type="password" id="signupMatchingPassword" class="form__input" placeholder="Confirm Password">
                 <div class="form__input-error-message"></div>
             </div>
-            <button class="form__button" type="submit">Login</button>
+            <button class="form__button" type="submit">Register</button>
             <p class="form__text">
                 <a href="./" id="linkLogin" class="form__link">Login with existing account</a>
             </p>

@@ -16,12 +16,6 @@ function clearInputError(inputElement) {
     inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
 }
 
-function validateEmail(email) {
-    return String(email)
-      .toLowerCase()
-      .match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-  };
-
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector("#login");
     const createAccountForm = document.querySelector("#createAccount");
@@ -38,24 +32,60 @@ document.addEventListener("DOMContentLoaded", () => {
         createAccountForm.classList.add("form--hidden");
     });
 
+    var form = $_GET("form");
+    var status = $_GET("status");
+    var msg = $_GET("msg");
+
+    if (form != null && status != null && msg != null) {
+        if (form === "login") {
+            loginForm.classList.remove("form--hidden");
+            createAccountForm.classList.add("form--hidden");
+            setFormMessage(loginForm, status, msg);
+        }else if (form === "register") {
+            loginForm.classList.add("form--hidden");
+            createAccountForm.classList.remove("form--hidden");
+            setFormMessage(createAccountForm, status, msg);
+        }
+    }
+
+    /*
     loginForm.addEventListener("submit", e => {
         // e.preventDefault();
 
-        // AJAX/Fetch login
-
         setFormMessage(loginForm, "error", "Invalid username or password")
     });
+    */
 
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
+            // Validate E-Mail
+            if (e.target.id === "loginEmail" && !validateEmail(e.target.value)) {
+                setInputError(inputElement, "Please enter a valid e-mail address");
+            }
+            
+             // Validate Password
+            if (e.target.id === "loginPassword" && !validatePassword(e.target.value)) {
+                setInputError(inputElement, "Password must be at least 8 characters long");
+            }
+
             // Validate username
-            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 4) {
+            if (e.target.id === "signupUsername"&& !validateUsername(e.target.value)) {
                 setInputError(inputElement, "Username must ba at least 3 characters long");
             }
 
             // Validate E-Mail
-            if (e.target.id === "signupEmail" && e.target.value.length > 0 && !validateEmail(e.target.value)) {
+            if (e.target.id === "signupEmail" && !validateEmail(e.target.value)) {
                 setInputError(inputElement, "Please enter a valid e-mail address");
+            }
+
+            // Validate Password
+            if (e.target.id === "signupPassword" && !validatePassword(e.target.value)) {
+                setInputError(inputElement, "Password must be at least 8 characters long");
+            }
+
+            // Validate Matching Password
+            if (e.target.id === "signupMatchingPassword" && !validateMatchingPassword(e.target.value, document.getElementById("signupPassword").value)) {
+                setInputError(inputElement, "Password does not match");
             }
         });
 
