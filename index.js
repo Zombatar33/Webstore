@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Datastore = require("nedb");
+const session = require("express-session");
 const app = express();
 
 var yea = false;
@@ -9,7 +10,7 @@ var userDatabase = new Datastore(__dirname + "/data/users.db");
 var productDatabase = new Datastore(__dirname + "/data/products.db");
 var couponsDatabase = new Datastore(__dirname + "/data/coupons.db");
 
-console.log("Loading database...")
+console.log("Loading databases...")
 userDatabase.loadDatabase();
 productDatabase.loadDatabase();
 couponsDatabase.loadDatabase();
@@ -18,14 +19,41 @@ app.listen(3000, () => {
   console.log("Application started and Listening on port 3000, http://localhost:3000");
 });
 
+app.use(session({
+    secret: 'wow secret',
+    resave: false,
+    saveUninitialized: false,
+}));
+
 // serve your css as static
 app.use(express.static(__dirname));
 
 // get our app to use body parser 
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.get("/logout", (req, res) => {
+    if (req.session.loggedIn) {
+        req.session.loggedIn = false;
+        res.redirect('/');
+    }else {
+        res.redirect('/');
+    }
+});
+
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/html/home.html");
+    if (req.session.loggedIn) {
+        res.redirect('/products/')
+    }else {
+        res.sendFile(__dirname + "/html/home.html");
+    }
+});
+
+app.get("/products/", (req, res) => {
+    if (req.session.loggedIn) {
+        res.sendFile(__dirname + "/html/products.html");
+    }else {
+        res.redirect('/');
+    }
 });
 
 app.post("/", (req, res) => {
@@ -41,7 +69,9 @@ app.post("/", (req, res) => {
                 if (docs == null) {
                     res.redirect('/?form=login&status=error&msg=Invalid credentials');
                 }else {
-                    res.send(`Hello, ${docs.username}!`);
+                    req.session.loggedIn = true;
+                    req.session.username = docs.username;
+                    res.redirect('/products/');
                 }
             });
         }else {
