@@ -15,6 +15,8 @@ npm install express nedb nodemon express-session body-parser bcrypt
 
 ## Usage
 
+The whole website is mobile-responsive!
+
 To launch the project, use `npm start` or `npm run devstart`
 
 The site will be available on `http://localhost:3000` by default
