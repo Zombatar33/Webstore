@@ -25,7 +25,7 @@
             "productDescription": "This is a description about the product 2",
             "productImage": "/images/product_test_1.png",
             "productPrice": 3.50,
-            "productDiscount": 20,
+            "productDiscount": 0.0,
             "coupons": 
             [ 
                 { 
@@ -39,11 +39,11 @@
             ]
         },
         {
-            "productName": "Test Product 2",
+            "productName": "Test Product 3",
             "productDescription": "This is a description about the product 2",
             "productImage": "/images/product_test_1.png",
             "productPrice": 3.50,
-            "productDiscount": 20,
+            "productDiscount": 0.20,
             "coupons": 
             [ 
                 { 

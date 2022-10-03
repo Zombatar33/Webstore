@@ -1,3 +1,13 @@
+/*
+var productName = products[i].productName;
+var productDescription = products[i].productDescription;
+var productImage = products[i].productImage;
+var productPrice = products[i].productPrice + " " + jsondata.currency;
+var productDiscount = products[i].productDiscount;
+var displayDiscount = (productDiscount * 100) + " % Discounted";
+var coupons = products[i].coupons;
+*/
+
 function generateDropdown() {
     fetch("/json/products.json")
         .then(response => {
@@ -7,7 +17,6 @@ function generateDropdown() {
             var parentDiv = document.getElementById("products");
 
             var currency = jsondata.currency;
-            var globalDiscount = jsondata.globalDiscount;
             var products = jsondata.products;
 
             for (var i = 0; i < products.length; i++) {
@@ -15,38 +24,45 @@ function generateDropdown() {
                 currentDiv.setAttribute('class', 'product');
 
                 var productName = products[i].productName;
-                var productDescription = products[i].productDescription;
                 var productImage = products[i].productImage;
-                var productPrice = products[i].productPrice + " " + jsondata.currency;
-                var productDiscount = products[i].productDiscount;
-                var displayDiscount = (productDiscount * 100) + " % Discounted";
-                var coupons = products[i].coupons;
+                var productPriceOriginal = products[i].productPrice;
+                var productPrice = Math.round((products[i].productPrice + Number.EPSILON) * 100) / 100;
+                var productDiscount = 1 - products[i].productDiscount;
+                var displayDiscount = (100 - productDiscount * 100) + " % Discounted";
+
+                var priceText = productPrice + " " + currency;
+
+                if (productDiscount < 1) {
+                    productPrice = Math.round(((productPriceOriginal * productDiscount) + Number.EPSILON) * 100) / 100;
+                    priceText = "<s>" + priceText + "</s> " + productPrice + " " + currency;
+                }
 
                 var h0 = document.createElement("p"); // productName
-                var h1 = document.createElement("p"); // productDescription
                 var h2 = document.createElement("img"); // productImage
                 var h3 = document.createElement("p"); // productPrice
                 var h4 = document.createElement("p"); // displayDiscount
-                var h5 = document.createElement("p"); // coupons
 
                 h0.innerHTML = productName;
-                h1.innerHTML = productDescription;
+                h0.setAttribute('class', "product__name");
                 h2.setAttribute('src', productImage)
                 h2.setAttribute('width', 400);
                 // h2.setAttribute('height', 'auto')
-                h3.innerHTML = productPrice;
+                h3.innerHTML = priceText;
+                h3.setAttribute('class', 'product__price');
                 h4.innerHTML = displayDiscount;
-                h5.innerHTML = coupons;
 
                 currentDiv.appendChild(h0);
-                currentDiv.appendChild(h1);
                 currentDiv.appendChild(h2);
                 currentDiv.appendChild(h3);
-                currentDiv.appendChild(h4);
-                currentDiv.appendChild(h5);
+
+                if (productDiscount < 1) {
+                    h4.setAttribute('class', 'product__discount');
+                    currentDiv.appendChild(h4);
+                }
 
                 currentDiv.setAttribute('onclick', "location.href='#';");
                 currentDiv.setAttribute('style', "cursor: pointer;");
+                currentDiv.setAttribute('id', `product-${i}`)
 
                 parentDiv.appendChild(currentDiv);
             }
