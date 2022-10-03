@@ -8,13 +8,13 @@ var displayDiscount = (productDiscount * 100) + " % Discounted";
 var coupons = products[i].coupons;
 */
 
-function generateDropdown() {
+function readProductsFromJSON() {
     fetch("/json/products.json")
         .then(response => {
             return response.json();
         })
         .then(jsondata => {
-            var parentDiv = document.getElementById("products");
+            var parentDiv = document.getElementById("container");
 
             var currency = jsondata.currency;
             var products = jsondata.products;
@@ -28,7 +28,7 @@ function generateDropdown() {
                 var productPriceOriginal = products[i].productPrice;
                 var productPrice = Math.round((products[i].productPrice + Number.EPSILON) * 100) / 100;
                 var productDiscount = 1 - products[i].productDiscount;
-                var displayDiscount = (100 - productDiscount * 100) + " % Discounted";
+                var displayDiscount = (100 - productDiscount * 100) + " % OFF";
 
                 var priceText = productPrice + " " + currency;
 
@@ -45,8 +45,7 @@ function generateDropdown() {
                 h0.innerHTML = productName;
                 h0.setAttribute('class', "product__name");
                 h2.setAttribute('src', productImage)
-                h2.setAttribute('width', 400);
-                // h2.setAttribute('height', 'auto')
+                h2.setAttribute('class', 'product__image');
                 h3.innerHTML = priceText;
                 h3.setAttribute('class', 'product__price');
                 h4.innerHTML = displayDiscount;
@@ -69,4 +68,4 @@ function generateDropdown() {
         });
 }
 
-generateDropdown();
+readProductsFromJSON();
