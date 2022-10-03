@@ -4,10 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/product.css">
     <title>Document</title>
 </head>
 <body>
     <script src="/javascript/validation.js"></script>
     <script src="/javascript/product.js"></script>
+
+    <iframe id="iframe" style="display:none;"></iframe>
+
+    <div class="container">
+
+        <div class="product__grid-container">
+            <div id="productName" class="product__name"></div>
+            <div id="productDescription" class="product__description"></div>
+            <div id="productImage" class="product__image"></div>
+            <div id="productPrice" class="product__price"></div>
+            <input class="product__coupon" id="inputCoupon" placeholder="Coupon">
+        </div>
+
+        <button class="form__button" id="couponButton" onclick="applyCoupon();">Apply Coupon</button>
+
+        <form method="POST" id="submit">
+            <input name="product" value="" id="postProduct" style="display: none;">
+            <button class="form__button" id="actionButton">Check Purchase</button>
+        </form>
+
+        <button class="form__button" onclick="window.location.href='/products'">Return</button>
+    </div>
 </body>
 </html>

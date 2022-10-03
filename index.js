@@ -7,9 +7,11 @@ const app = express();
 var yea = false;
 
 var userDatabase = new Datastore(__dirname + "/data/users.db");
+var purchaseDatabase = new Datastore(__dirname + "/data/purchases.db");
 
 console.log("Loading database...")
 userDatabase.loadDatabase();
+purchaseDatabase.loadDatabase();
 
 app.listen(3000, () => {
   console.log("Application started and Listening on port 3000, http://localhost:3000");
@@ -30,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get("/logout", (req, res) => {
     if (req.session.loggedIn) {
         req.session.loggedIn = false;
+        req.session.user = null;
         res.redirect('/?form=login&status=success&msg=Logged out successfully');
     }else {
         res.redirect('/');
@@ -52,6 +55,49 @@ app.get("/products/", (req, res) => {
     }
 });
 
+app.get("/product/", (req, res) => {
+    if (req.session.loggedIn) {
+        res.sendFile(__dirname + "/html/product.html");
+    }else {
+        res.redirect('/');
+    }
+});
+
+app.get("/validate", (req, res) => {
+    var id = req.query.id;
+
+    purchaseDatabase.findOne({_id: id}, function(err, docs) {
+        if (docs != null) {
+            res.status(200).send({
+                status: "true"
+            })
+        }else {
+            res.status(404).send({
+                status: "false"
+            });
+        }
+    });
+});
+
+app.post("/product", (req, res) => {
+    var user = req.session.user;
+    var product = req.body.product;
+
+    var _id = user + product;
+
+    // normally you would process the payment here
+    // but for the sake of simplicity we assume that the payment was successful
+
+    var obj = { _id }
+
+    userDatabase.findOne({_id: _id}, function (err, docs) {
+        if (docs === null) {
+            purchaseDatabase.insert(obj);
+        }
+        res.redirect(`/product?product=${product}&purchase=true&id=${_id}`);
+    });
+});
+
 app.post("/", (req, res) => {
     var type = req.body.type;
 
@@ -66,7 +112,7 @@ app.post("/", (req, res) => {
                     res.redirect('/?form=login&status=error&msg=Invalid credentials');
                 }else {
                     req.session.loggedIn = true;
-                    req.session.username = docs.username;
+                    req.session.user = docs.username;
                     res.redirect('/products/');
                 }
             });

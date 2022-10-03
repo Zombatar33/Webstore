@@ -23,6 +23,7 @@ function readProductsFromJSON() {
                 var currentDiv = document.createElement("div");
                 currentDiv.setAttribute('class', 'product');
 
+                var productId = products[i].productId;
                 var productName = products[i].productName;
                 var productImage = products[i].productImage;
                 var productPriceOriginal = products[i].productPrice;
@@ -59,7 +60,7 @@ function readProductsFromJSON() {
                     currentDiv.appendChild(h4);
                 }
 
-                currentDiv.setAttribute('onclick', "location.href='#';");
+                currentDiv.setAttribute('onclick', `location.href="/product?product=${productId}"`);
                 currentDiv.setAttribute('style', "cursor: pointer;");
                 currentDiv.setAttribute('id', `product-${i}`)
 

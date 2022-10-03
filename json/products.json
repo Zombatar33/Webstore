@@ -3,56 +3,62 @@
     "products": 
     [
         {
+            "productId": "product_1",
             "productName": "Test Product 1",
             "productDescription": "This is a description about the product",
-            "productImage": "/images/product_test_1.png",
+            "productImage": "/images/product_1.png",
+            "productLocation": "/products/product_1.txt",
             "productPrice": 20.50,
             "productDiscount": 0.5,
             "coupons": 
             [ 
                 { 
                     "code": "TEST1",
-                    "discount": 0.5
+                    "discount": 0.1
                 },
                 { 
                     "code": "TEST2",
-                    "discount": 0.1
+                    "discount": 0.2
                 }
             ]
         },
         {
+            "productId": "product_2",
             "productName": "Test Product 2",
             "productDescription": "This is a description about the product 2",
-            "productImage": "/images/product_test_1.png",
+            "productImage": "/images/product_2.png",
+            "productLocation": "/products/product_2.txt",
             "productPrice": 3.50,
             "productDiscount": 0.0,
             "coupons": 
             [ 
                 { 
                     "code": "TEST1",
-                    "discount": 0.5
+                    "discount": 0.1
                 },
                 { 
                     "code": "TEST2",
-                    "discount": 0.1
+                    "discount": 1
                 }
             ]
         },
         {
+            "productId": "product_3",
             "productName": "Test Product 3",
-            "productDescription": "This is a description about the product 2",
-            "productImage": "/images/product_test_1.png",
+            "productDescription": "This is a description about the product 3",
+            "productImage": "/images/product_3.png",
+            "productLocation": "/products/product_3.txt",
             "productPrice": 3.50,
             "productDiscount": 0.20,
             "coupons": 
             [ 
                 { 
                     "code": "TEST1",
-                    "discount": 0.5
+                    "discount": 0.1
                 },
                 { 
                     "code": "TEST2",
-                    "discount": 0.1
+                    "discount": 0.2
                 }
             ]
         }
