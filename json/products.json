@@ -1,0 +1,60 @@
+{
+    "currency": "$",
+    "products": 
+    [
+        {
+            "productName": "Test Product 1",
+            "productDescription": "This is a description about the product",
+            "productImage": "/images/product_test_1.png",
+            "productPrice": 20.50,
+            "productDiscount": 0.5,
+            "coupons": 
+            [ 
+                { 
+                    "code": "TEST1",
+                    "discount": 0.5
+                },
+                { 
+                    "code": "TEST2",
+                    "discount": 0.1
+                }
+            ]
+        },
+        {
+            "productName": "Test Product 2",
+            "productDescription": "This is a description about the product 2",
+            "productImage": "/images/product_test_1.png",
+            "productPrice": 3.50,
+            "productDiscount": 20,
+            "coupons": 
+            [ 
+                { 
+                    "code": "TEST1",
+                    "discount": 0.5
+                },
+                { 
+                    "code": "TEST2",
+                    "discount": 0.1
+                }
+            ]
+        },
+        {
+            "productName": "Test Product 2",
+            "productDescription": "This is a description about the product 2",
+            "productImage": "/images/product_test_1.png",
+            "productPrice": 3.50,
+            "productDiscount": 20,
+            "coupons": 
+            [ 
+                { 
+                    "code": "TEST1",
+                    "discount": 0.5
+                },
+                { 
+                    "code": "TEST2",
+                    "discount": 0.1
+                }
+            ]
+        }
+    ]
+}

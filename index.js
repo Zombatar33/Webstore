@@ -7,13 +7,9 @@ const app = express();
 var yea = false;
 
 var userDatabase = new Datastore(__dirname + "/data/users.db");
-var productDatabase = new Datastore(__dirname + "/data/products.db");
-var couponsDatabase = new Datastore(__dirname + "/data/coupons.db");
 
-console.log("Loading databases...")
+console.log("Loading database...")
 userDatabase.loadDatabase();
-productDatabase.loadDatabase();
-couponsDatabase.loadDatabase();
 
 app.listen(3000, () => {
   console.log("Application started and Listening on port 3000, http://localhost:3000");
