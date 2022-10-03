@@ -56,32 +56,32 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".form__input").forEach(inputElement => {
         inputElement.addEventListener("blur", e => {
             // Validate E-Mail
-            if (e.target.id === "loginEmail" && !validateEmail(e.target.value)) {
+            if (e.target.id === "loginEmail" && e.target.value.length > 0 && !validateEmail(e.target.value)) {
                 setInputError(inputElement, "Please enter a valid e-mail address");
             }
             
              // Validate Password
-            if (e.target.id === "loginPassword" && !validatePassword(e.target.value)) {
+            if (e.target.id === "loginPassword" && e.target.value.length > 0 && !validatePassword(e.target.value)) {
                 setInputError(inputElement, "Password must be at least 8 characters long");
             }
 
             // Validate username
-            if (e.target.id === "signupUsername"&& !validateUsername(e.target.value)) {
+            if (e.target.id === "signupUsername" && e.target.value.length > 0 && !validateUsername(e.target.value)) {
                 setInputError(inputElement, "Username must ba at least 3 characters long");
             }
 
             // Validate E-Mail
-            if (e.target.id === "signupEmail" && !validateEmail(e.target.value)) {
+            if (e.target.id === "signupEmail" && e.target.value.length > 0 && !validateEmail(e.target.value)) {
                 setInputError(inputElement, "Please enter a valid e-mail address");
             }
 
             // Validate Password
-            if (e.target.id === "signupPassword" && !validatePassword(e.target.value)) {
+            if (e.target.id === "signupPassword" && e.target.value.length > 0 && !validatePassword(e.target.value)) {
                 setInputError(inputElement, "Password must be at least 8 characters long");
             }
 
             // Validate Matching Password
-            if (e.target.id === "signupMatchingPassword" && !validateMatchingPassword(e.target.value, document.getElementById("signupPassword").value)) {
+            if (e.target.id === "signupMatchingPassword" && e.target.value.length > 0 && !validateMatchingPassword(e.target.value, document.getElementById("signupPassword").value)) {
                 setInputError(inputElement, "Password does not match");
             }
         });

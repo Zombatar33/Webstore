@@ -1,10 +1,12 @@
 body {
-    --color-background: #ffffff;
+    --color-background: #141414;
+    --color-background-dark: #121212;
     --color-primary: #009579;
     --color-primary-dark: #007f67;
-    --color-secondary: #252c6a;
+    --color-secondary: #5c67c2;
     --color-error: #cc3333;
     --color-success: #4bb544;
+    --color-font: #e8e8e8;
     --border-radius: 4px;
 
     margin: 0;
@@ -13,7 +15,8 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    background-color: var(--color-background);
+    background-color: var(--color-background-dark);
+    color: var(--color-font);
 }
 
 .container {
@@ -82,7 +85,10 @@ body {
     -o-border-radius: var(--border-radius);
     border: 1px solid #dddddd;
     outline: none;
-    background: #eeeeee;
+
+    background-color: var(--color-background-dark);
+    color: var(--color-font);
+
     transition: background 0.2s, border-color 0.2s;
     -webkit-transition: background 0.2s, border-color 0.2s;
     -moz-transition: background 0.2s, border-color 0.2s;
@@ -92,7 +98,8 @@ body {
 
 .form__input:focus {
     border-color: var(--color-primary);
-    background: #ffffff;
+    background-color: var(--color-background-dark);
+    color: var(--color-font);
 }
 
 .form__input--error {
