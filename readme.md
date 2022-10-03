@@ -48,6 +48,8 @@ I decided to use node.js because it is easy to set everything up with it
 I also went with HTML5 + Express to implement the whole website, and [NeDB](https://github.com/louischatriot/nedb) for data storage
 
 ## Additional Note
+Tempering with the DB while the site is running can lead to it not working anymore, so I recommend not doing it!
+
 The presentation to the website idea can be found [here](https://docs.google.com/presentation/d/1sRhLBZJ7PW9dC92h-BVK5sXEsUPuklnIzshECNmCeG0/edit#slide=id.g13779ad4e94_0_75) 
 
 Or copy and paste the link: https://docs.google.com/presentation/d/1sRhLBZJ7PW9dC92h-BVK5sXEsUPuklnIzshECNmCeG0/edit#slide=id.g13779ad4e94_0_75
