@@ -29,14 +29,6 @@ body {
     text-align: center;
 }
 
-.products {
-    width: 500px;
-    max-width: 500px;
-    display: inline-block;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
 .product {
     display: inline-block;
     text-align: center;

@@ -17,6 +17,8 @@ npm install express nedb nodemon express-session body-parser bcrypt
 
 To launch the project, use `npm start` or `npm run devstart`
 
+The site will be available on `http://localhost:3000` by default
+
 On the landing page you'll see the login window, below the login button you can click on "Create new account" to register. Every field will validate once it has at least one character typed. 
 
 The login and register forms also check for a valid e-mail format (including special chars).
