@@ -8,6 +8,11 @@ By Adam Ebied, Matriculation Number 577868
 
 [node.js](https://nodejs.org/en/) is required to run this project.
 
+Install the necessary modules with: 
+```
+npm install express nedb nodemon express-session body-parser bcrypt
+```
+
 ## Usage
 
 To launch the project, use `npm start` or `npm run devstart`
@@ -55,3 +60,15 @@ The presentation to the website idea can be found [here](https://docs.google.com
 Or copy and paste the link: https://docs.google.com/presentation/d/1sRhLBZJ7PW9dC92h-BVK5sXEsUPuklnIzshECNmCeG0/edit#slide=id.g13779ad4e94_0_75
 
 Thank you a lot for the semester :)
+
+Modules used:
+
+```
+webstore@1.0.0 F:\Web Projects\Webstore
+├── bcrypt@5.0.1
+├── body-parser@1.20.0
+├── express-session@1.17.3
+├── express@4.18.1
+├── nedb@1.8.0
+└── nodemon@2.0.20
+```
