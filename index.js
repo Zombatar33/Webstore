@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const Datastore = require("nedb");
 const session = require("express-session");
+const bcrypt = require("bcrypt");
 const app = express();
 
 var yea = false;
@@ -102,37 +103,48 @@ app.post("/", (req, res) => {
     var type = req.body.type;
 
     if (type === "login") {
-        var email = req.body.email;
-        var password = req.body.password;
+            var email = req.body.email;
+            var password = req.body.password;
 
-        if (validateEmail(email) && validatePassword(password)) {
-            userDatabase.findOne({email: email}, function (err, docs) 
-            { 
-                if (docs == null) {
-                    res.redirect('/?form=login&status=error&msg=Invalid credentials');
-                }else {
-                    req.session.loggedIn = true;
-                    req.session.user = docs.username;
-                    res.redirect('/products/');
-                }
-            });
-        }else {
-            res.redirect('/?form=login&status=error&msg=Invalid credentials');
-        }
-
-        return;
+            if (validateEmail(email) && validatePassword(password)) {
+                userDatabase.findOne({email: email}, function (err, docs) 
+                { 
+                    if (docs == null) {
+                        res.redirect('/?form=login&status=error&msg=Invalid credentials');
+                    }else {
+                        if (bcrypt.compareSync(password, docs.hashedPassword)) {
+                            req.session.loggedIn = true;
+                            req.session.user = docs.username;
+                            res.redirect('/products/');
+                        }else {
+                            res.redirect('/?form=login&status=error&msg=Invalid credentials');
+                        }
+                    }
+                });
+            }else {
+                res.redirect('/?form=login&status=error&msg=Invalid credentials');
+            }
+            return;
     } else if (type === "register") {
         var username = req.body.username;
         var email = req.body.email;
         var password = req.body.password;
         var confirmPassword = req.body.confirmPassword;
 
+        var hashedPassword;
+
+        try {
+            hashedPassword = bcrypt.hashSync(password, 10);
+        }catch (e) {
+            res.status(500).send();
+        }
+
         username = username.trim();
         email = email.trim();
         
         _id = username;
 
-        var obj = { _id, username, email, password };
+        var obj = { _id, username, email, hashedPassword };
 
         if (validateEmail(email) && validateUsername(username) && validatePassword(password) && validateMatchingPassword(password, confirmPassword)) {
             userDatabase.findOne({_id: obj.username}, function (err, docs) 
