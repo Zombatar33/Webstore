@@ -27,7 +27,7 @@ Once registered, the user will be stored in a server-side database, the password
 
 After logging in, the user can either log out or browse the available products. Products that are discounted will signal it with a text and the percentage of the discount.
 
-After clicking on a product, it will show the description of the product and you can also apply a coupon code. Only one coupon code can be active at a time.
+After clicking on a product, it will show the description of the product and you can also apply a coupon code. Only one coupon code can be active at a time. For now I have added two coupons to every product: `TEST1` and `TEST2`
 
 The user can then check if they already purchased the product by clicking on "Check purchase" or they can return back to the products screen. For the sake of simplicity, I didn't implement an actual payment method, but it could be done with either the Stripe API or PayPal API, and then validate if the purchase has been made or not.
 
