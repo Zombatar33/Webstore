@@ -7,6 +7,7 @@ body {
     --color-error: #cc3333;
     --color-success: #4bb544;
     --color-font: #e8e8e8;
+    --color-font-dark: #808080;
     --border-radius: 4px;
 
     margin: 0;
@@ -87,6 +88,7 @@ body {
     outline: none;
 
     background-color: var(--color-background-dark);
+    border-color: var(--color-font-dark);
     color: var(--color-font);
 
     transition: background 0.2s, border-color 0.2s;
