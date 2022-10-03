@@ -30,10 +30,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get("/logout", (req, res) => {
     if (req.session.loggedIn) {
         req.session.loggedIn = false;
-        res.redirect('/');
-    }else {
-        res.redirect('/');
     }
+    res.redirect('/');
 });
 
 app.get("/", (req, res) => {
